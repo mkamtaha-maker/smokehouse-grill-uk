@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Saffron - Digital Menu</title>
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --text: #f0f0f0;
+            --card: #1a1a1a;
+            --accent: #d4af37;
+            --sub: #999;
+            --border: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 16px 60px 16px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .biz-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 0 0 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .biz-desc {
+            font-size: 14px;
+            color: var(--sub);
+            margin-bottom: 12px;
+        }
+
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+        }
+
+        .cat-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 10;
+        }
+
+        .cat-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-pill {
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .item-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+            transition: transform 0.2s;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .item-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-inline-start: 12px;
+        }
+
+        .item-desc {
+            font-size: 13px;
+            color: var(--sub);
+            margin: 0;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #000;
+            margin-inline-start: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .contact-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--card);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        [dir="rtl"] .item-price { margin-inline-start: 12px; margin-inline-end: 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="biz-name">Golden Saffron</div>
+        <div class="biz-desc">Fine Dining Mediterranean & Persian Cuisine</div>
+        
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="toggleLang('en')">English</button>
+            <button class="lang-btn" onclick="toggleLang('ar')">العربية</button>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+            <input type="text" id="menu-search" placeholder="🔍 Search menu / ابحث في القائمة..." onkeyup="filterMenu()" style="width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 14px; outline: none; box-sizing: border-box;" />
+        </div>
+    </header>
+
+    <!-- English Section -->
+    <div id="lang-en" dir="ltr">
+        <div class="cat-nav">
+            <a href="#en-starters" class="cat-pill">Starters</a>
+            <a href="#en-mains" class="cat-pill">Main Courses</a>
+        </div>
+
+        <section id="en-starters">
+            <h2 class="category-title">Starters</h2>
+            
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">Hummus Trio <span class="badge">Best Seller</span></span>
+                    <span class="item-price">35 AED</span>
+                </div>
+                <p class="item-desc">Classic, beetroot, and pesto hummus served with warm pita bread.</p>
+            </div>
+
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">Falafel Bites <span class="badge">Vegan</span></span>
+                    <span class="item-price">28 AED</span>
+                </div>
+                <p class="item-desc">Crispy herb-infused chickpea balls with tahini dipping sauce.</p>
+            </div>
+        </section>
+
+        <section id="en-mains">
+            <h2 class="category-title">Main Courses</h2>
+            
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">Lamb Kofta</span>
+                    <span class="item-price">85 AED</span>
+                </div>
+                <p class="item-desc">Grilled spiced lamb skewers served with aromatic saffron rice and grilled tomatoes.</p>
+            </div>
+
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">Butter Chicken</span>
+                    <span class="item-price">75 AED</span>
+                </div>
+                <p class="item-desc">Creamy tomato-based curry with tender chicken pieces and butter naan.</p>
+            </div>
+        </section>
+
+        <a href="tel:+971501234567" class="contact-btn">📞 Call to Order</a>
+
+        <div class="menu-footer" style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 12px; color: var(--sub); text-align: center; line-height: 1.5;">
+            Please inform our staff about any allergies.
+        </div>
+    </div>
+
+    <!-- Arabic Section -->
+    <div id="lang-ar" dir="rtl" class="hidden">
+        <div class="cat-nav">
+            <a href="#ar-starters" class="cat-pill">المقبلات</a>
+            <a href="#ar-mains" class="cat-pill">الأطباق الرئيسية</a>
+        </div>
+
+        <section id="ar-starters">
+            <h2 class="category-title">المقبلات</h2>
+            
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">ثلاثي الحمص <span class="badge">الأكثر طلباً</span></span>
+                    <span class="item-price">٣٥ درهم</span>
+                </div>
+                <p class="item-desc">حمص كلاسيكي، شمندر، وبيستو يقدم مع خبز البيتا الدافئ.</p>
+            </div>
+
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">لقيمات الفلافل <span class="badge">نباتي</span></span>
+                    <span class="item-price">٢٨ درهم</span>
+                </div>
+                <p class="item-desc">كرات حمص مقرمشة بالأعشاب تقدم مع صلصة الطحينة.</p>
+            </div>
+        </section>
+
+        <section id="ar-mains">
+            <h2 class="category-title">الأطباق الرئيسية</h2>
+            
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">كفتة لحم</span>
+                    <span class="item-price">٨٥ درهم</span>
+                </div>
+                <p class="item-desc">أسياخ لحم متبلة مشوية تقدم مع أرز بالزعفران وطماطم مشوية.</p>
+            </div>
+
+            <div class="item-box">
+                <div class="item-header">
+                    <span class="item-name">دجاج بالزبدة</span>
+                    <span class="item-price">٧٥ درهم</span>
+                </div>
+                <p class="item-desc">دجاج طري بصلصة الطماطم والكريمة الغنية يقدم مع خبز النان بالزبدة.</p>
+            </div>
+        </section>
+
+        <a href="tel:+971501234567" class="contact-btn">📞 اتصل للطلب</a>
+
+        <div class="menu-footer" style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 12px; color: var(--sub); text-align: center; line-height: 1.5;">
+            يرجى إبلاغ موظفينا بأي نوع من الحساسية الغذائية.
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleLang(lang) {
+        const enDiv = document.getElementById('lang-en');
+        const arDiv = document.getElementById('lang-ar');
+        const btns = document.querySelectorAll('.lang-btn');
+        
+        if (lang === 'en') {
+            enDiv.classList.remove('hidden');
+            arDiv.classList.add('hidden');
+            btns[0].classList.add('active');
+            btns[1].classList.remove('active');
+        } else {
+            enDiv.classList.add('hidden');
+            arDiv.classList.remove('hidden');
+            btns[1].classList.add('active');
+            btns[0].classList.remove('active');
+        }
+        window.scrollTo(0,0);
+    }
+
+    function filterMenu() {
+        var input = document.getElementById('menu-search').value.toLowerCase();
+        var items = document.querySelectorAll('.item-box');
+        items.forEach(function(el) {
+            var text = el.innerText.toLowerCase();
+            el.style.display = text.indexOf(input) > -1 ? '' : 'none';
+        });
+        
+        // Hide empty category titles during search
+        const categories = document.querySelectorAll('section');
+        categories.forEach(cat => {
+            const hasVisibleItems = Array.from(cat.querySelectorAll('.item-box')).some(item => item.style.display !== 'none');
+            cat.querySelector('.category-title').style.display = hasVisibleItems ? '' : 'none';
+        });
+    }
+</script>
+
+</body>
+</html>
